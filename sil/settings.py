@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import environ
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,11 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4d-(%l137*jk%_#v3yess(ahh08!&erhw3_jttj*47i6v5fj%i'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -70,16 +68,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sil.wsgi.application'
 
+# configure application environments
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DEBUG = env.bool("DEBUG", default=False)
+TEMPLATE_DEBUG = DEBUG
+SECRET_KEY = env.str("SECRET_KEY", "defaultkey")
+
+# setting up postgress database
+DATABASES = {"default": env.db()}
 
 
 # Password validation
