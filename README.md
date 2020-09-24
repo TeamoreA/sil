@@ -1,14 +1,17 @@
 # SIL
-[![sill-app Actions Status](https://github.com/TeamoreA/sil-app/workflows/SIL/badge.svg)](https://github.com/TeamoreA/sil/actions)
+[![sill-app Actions Status](https://github.com/TeamoreA/sil/workflows/sil-app/badge.svg)](https://github.com/TeamoreA/sil/actions)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 - This is a simple python orders service
+
+
+This application has been documented using Postman Documentation and can be viewed [here.](https://documenter.getpostman.com/view/5990083/TVKFzbe6)
 
 ## Setting Up the Application Locally
 
 ### Installing PostgreSQL
 
-- PostgreSQL server is required by the application for the application to run. To use the local PostgreSQL server, ensure you have PostgreSQL [installed](https://www.postgresql.org/docs/12/tutorial-install.html) and running. ensure you add the server PostgreSQL connection URL to your .env file
+- PostgreSQL server is required by the application for the application to run. To use the local PostgreSQL server, ensure you have PostgreSQL [installed](https://www.postgresql.org/docs/12/tutorial-install.html) and running. Ensure you add the server PostgreSQL connection URL to your `.env` file
 
     ``` bash
     DATABASE_URL=postgres://<user>:<password>@<host>:<port>/<database name> #  postgres://postgres@127.0.0.1:5432 if no username or password configured, or just a remote host's URL
