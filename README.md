@@ -1,5 +1,5 @@
 # SIL
-[![SIL Actions Status](https://github.com/TeamoreA/sil/workflows/SIL/badge.svg)](https://github.com/TeamoreA/sil/actions)
+[![sill-app Actions Status](https://github.com/TeamoreA/sil-app/workflows/SIL/badge.svg)](https://github.com/TeamoreA/sil/actions)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 - This is a simple python orders service
