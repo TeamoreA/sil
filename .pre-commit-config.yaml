@@ -1,9 +1,5 @@
 - repo: local
   hooks:
-      - id: isort
-        name: sort imports
-        language: system
-        entry: 'isort -rc -y -sl'
       - id: black
         name: black
         language: system
