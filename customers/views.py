@@ -22,21 +22,22 @@ class LoginView(APIView):
         data = json.loads(r.text)
 
         if "error" in data:
-            content = {
-                "message": "wrong google \
-                    token this google token is already expired."
-            }
+            content = {"message": "This token is already expired."}
             return Response(content)
 
         # create user if not exist
+        email = data.get("email")
+        name = data.get("name", email.split("@")[0])
         try:
-            user = User.objects.get(username=data["name"])
+            if data.get("name"):
+                user = User.objects.get(username=name)
+            user = User.objects.get(email=email)
         except User.DoesNotExist:
             user = User()
-            user.username = data["name"]
+            user.username = name
             # provider random default password
             user.password = make_password(UserManager().make_random_password())
-            user.email = data["email"]
+            user.email = email
             user.code = data["id"]
             user.last_login = now()
             user.save()
