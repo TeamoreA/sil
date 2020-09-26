@@ -1,0 +1,11 @@
+[run]
+source = .
+omit = */tests/*
+        */migrations/*
+        */node_modules/*
+        venv/*
+        manage.py
+        */apps.py
+        sil/*
+[report]
+show_missing = True

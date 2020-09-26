@@ -1,9 +1,9 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from orders.models import Order
-from orders.renders import DefaultRenderer
-from orders.serializers import OrderSerializer
+from apps.orders.models import Order
+from apps.orders.renders import DefaultRenderer
+from apps.orders.serializers import OrderSerializer
 
 
 class OrderList(ListCreateAPIView):

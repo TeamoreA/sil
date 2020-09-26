@@ -2,15 +2,15 @@ import json
 
 import requests
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import BaseUserManager
 from django.utils.timezone import now
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from customers.models import Customer as User
-from customers.models import UserManager
-from customers.serializers import RegistrationSerializer
+from apps.customers.models import Customer as User
+from apps.customers.serializers import RegistrationSerializer
 
 
 class LoginView(APIView):
@@ -24,13 +24,14 @@ class LoginView(APIView):
         # validate the token
         payload = {"access_token": request.data.get("token")}
         phone_number = request.data.get("phone_number")
+        # scope https://www.googleapis.com/auth/userinfo.email
         r = requests.get(
             "https://www.googleapis.com/oauth2/v2/userinfo", params=payload
         )
         data = json.loads(r.text)
         if "error" in data:
-            content = {"message": "This token is already expired."}
-            return Response(content)
+            content = {"message": "This token is incorrect or already expired."}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
         # create user if not exist
         email = data.get("email")
         name = data.get("name", email.split("@")[0])
@@ -38,7 +39,7 @@ class LoginView(APIView):
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             # provider random default password
-            password = make_password(UserManager().make_random_password())
+            password = make_password(BaseUserManager().make_random_password())
             user_data = {
                 "email": email,
                 "code": data["id"],
