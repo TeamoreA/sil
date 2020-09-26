@@ -27,18 +27,15 @@ class DefaultRenderer(JSONRenderer):
         Format response data for application views
         """
         if renderer_context["response"].status_code == 422:
-            renderer_context[
-                "response"
-            ].status_code = status.HTTP_400_BAD_REQUEST  # noqa
+            renderer_context["response"].status_code = status.HTTP_400_BAD_REQUEST
         status_code = renderer_context["response"].status_code
         if renderer_context["request"].method == "GET":
             if renderer_context["kwargs"] == {}:
                 message = (
-                    "All %s"
-                    % renderer_context["view"].pluralized_name.capitalize()  # noqa
+                    "All %s" % renderer_context["view"].pluralized_name.capitalize()
                 )
             else:
-                message = "%s info" % renderer_context["view"].name.capitalize()  # noqa
+                message = "%s info" % renderer_context["view"].name.capitalize()
         else:
             message = message_map(renderer_context["view"])(
                 renderer_context["request"].method

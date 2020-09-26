@@ -4,7 +4,7 @@ import africastalking
 import environ
 from rest_framework import serializers
 
-from orders.models import Order
+from apps.orders.models import Order
 
 env = environ.Env()
 environ.Env.read_env()

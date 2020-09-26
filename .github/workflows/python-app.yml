@@ -47,3 +47,13 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Unittests
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        AF_USERNAME: ${{ secrets.AF_USERNAME }}
+        AF_API_KEY: ${{ secrets.AF_API_KEY }}
+      run: |
+        coverage erase
+        coverage run manage.py test

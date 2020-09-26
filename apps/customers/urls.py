@@ -1,6 +1,6 @@
 from django.urls import path
 
-from customers import views
+from apps.customers import views
 
 app_name = "auth"
 

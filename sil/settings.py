@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     # local apps
-    "customers",
-    "orders",
+    "apps.customers",
+    "apps.orders",
 ]
 
 MIDDLEWARE = [
@@ -82,6 +82,18 @@ SECRET_KEY = env.str("SECRET_KEY", "defaultkey")
 
 # setting up postgress database
 DATABASES = {"default": env.db()}
+
+if os.environ.get("GITHUB_WORKFLOW"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "github_actions",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
+    }
 
 
 # Password validation

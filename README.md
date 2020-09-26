@@ -1,4 +1,5 @@
 # SIL
+[![Build Status](https://travis-ci.com/TeamoreA/sil.svg?branch=master)](https://travis-ci.com/TeamoreA/sil)
 [![sill-app Actions Status](https://github.com/TeamoreA/sil/workflows/sil-app/badge.svg)](https://github.com/TeamoreA/sil/actions)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
