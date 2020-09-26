@@ -24,6 +24,7 @@ class LoginView(APIView):
         # validate the token
         payload = {"access_token": request.data.get("token")}
         phone_number = request.data.get("phone_number")
+        # scope https://www.googleapis.com/auth/userinfo.email
         r = requests.get(
             "https://www.googleapis.com/oauth2/v2/userinfo", params=payload
         )
