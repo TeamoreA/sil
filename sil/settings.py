@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import django_heroku
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -177,3 +178,7 @@ OIDC_AUTH = {
     # (Optional) A cache key prefix when storing and retrieving cached values
     "OIDC_CACHE_PREFIX": "oidc_auth.",
 }
+
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
