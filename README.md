@@ -48,4 +48,16 @@ This application has been documented using Postman Documentation and can be view
 
 ### Running Tests
 
-- To run unit test, [pytest](https://docs.pytest.org/en/latest/) is used. Run `pytest` at the root of the project
+- To run unit test. Run `python manage.py test` at the root of the project
+
+### Contributing
+
+- Before contributing, ensure to install `pre-commit` by running  in the root of the application after application setup.
+    ``` bash
+    $ pre-commit init
+    ```
+    This is to enforce coding styles.
+
+## Deployments and Releases
+
+- The project had been deployed to Heroku. To view the various versions of the deployed apps, go [here](https://github.com/TeamoreA/sil/deployments)
