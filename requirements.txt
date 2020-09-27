@@ -9,12 +9,15 @@ chardet==3.0.4
 click==7.1.2
 contextlib2==0.6.0.post1
 coverage==5.3
+dj-database-url==0.5.0
 Django==3.1.1
 django-environ==0.4.5
+django-heroku==0.3.1
 djangorestframework==3.11.1
 djangorestframework-simplejwt==4.4.0
 drf-oidc-auth==0.10.0
 future==0.18.2
+gunicorn==20.0.4
 idna==2.10
 importlib-metadata==2.0.0
 iniconfig==1.0.1
@@ -44,5 +47,6 @@ toml==0.10.1
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
 urllib3==1.25.10
+whitenoise==5.2.0
 wrapt==1.12.1
 zipp==3.2.0
