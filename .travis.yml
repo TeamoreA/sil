@@ -22,7 +22,10 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - python manage.py test
+  - coverage erase
+  - coverage run manage.py test
+  - coverage xml
+  - coverage report
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
