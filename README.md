@@ -9,7 +9,7 @@
 
 This application has been documented using Postman Documentation and can be viewed [here.](https://documenter.getpostman.com/view/5990083/TVKFzbe6)
 
-## Setting Up the Application Locally
+## Setting Up the Application Locally using virtual environment
 
 ### Installing PostgreSQL
 
@@ -50,6 +50,18 @@ This application has been documented using Postman Documentation and can be view
 ### Running Tests
 
 - To run unit test. Run `python manage.py test` at the root of the project
+
+## Setting Up the Application Locally using docker
+
+- Install docker and docker-compose into your local machine
+
+- Build application
+  `docker-compose build`
+
+- Run application
+  `docker-compose up`
+
+- Open `http://127.0.0.1:8000` to run the application.
 
 ### Contributing
 
