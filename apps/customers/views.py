@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta
 
 import requests
 from django.contrib.auth.hashers import make_password
@@ -53,15 +54,17 @@ class LoginView(APIView):
             serializer.save()
             user = User.objects.get(email=email)
         # generate token without username & password
-        token = RefreshToken.for_user(user)
+        refresh = RefreshToken.for_user(user)
+        access_token = refresh.access_token
+        access_token.set_exp(lifetime=timedelta(days=2))
         response = {
             "status": "success",
             "message": "You have been authenticated succesfully",
             "data": {
                 "username": name,
                 "email": email,
-                "access_token": str(token.access_token),
-                "refresh_token": str(token),
+                "access_token": str(access_token),
+                "refresh_token": str(refresh),
             },
         }
         return Response(response, status=status.HTTP_200_OK)
