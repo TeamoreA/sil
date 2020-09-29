@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import django_heroku
@@ -145,6 +146,10 @@ REST_FRAMEWORK = {
         "oidc_auth.authentication.BearerTokenAuthentication",
     ),
 }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=20),
+}
 
 OIDC_AUTH = {
     # Specify OpenID Connect endpoint. Configuration will be
@@ -154,7 +159,7 @@ OIDC_AUTH = {
     # Accepted audiences the ID Tokens can be issued to
     "OIDC_AUDIENCES": (
         "myapp",
-        "customers",
+        "apps",
     ),
     # (Optional) Function that resolves id_token into user.
     # This function receives a request and an id_token dict and expects to

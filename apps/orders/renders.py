@@ -7,7 +7,7 @@ from rest_framework.utils.serializer_helpers import ReturnList
 
 message_map = lambda view: lambda status_code: {  # noqa
     "POST": "%s created successfully" % view.name.capitalize(),
-    "PATCH": "%s updated succesfully" % view.name.capitalize(),
+    "PUT": "%s updated succesfully" % view.name.capitalize(),
     "DELETE": "%s deleted successfully" % view.name.capitalize(),
 }.get(status_code)
 
