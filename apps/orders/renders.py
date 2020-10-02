@@ -40,7 +40,9 @@ class DefaultRenderer(JSONRenderer):
             message = message_map(renderer_context["view"])(
                 renderer_context["request"].method
             )
-        data = (
+        if data is None:
+            data = {}
+        res_data = (
             ({"status": "success", "message": message, "data": data})
             if status.is_success(status_code)
             else {
@@ -50,5 +52,5 @@ class DefaultRenderer(JSONRenderer):
             }
         )
         return super(DefaultRenderer, self).render(
-            data, accepted_media_type, renderer_context
+            res_data, accepted_media_type, renderer_context
         )
