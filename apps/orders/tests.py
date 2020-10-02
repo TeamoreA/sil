@@ -68,6 +68,16 @@ class AuthTestCase(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data["item_name"], "an item")
 
+    def test_updating_of_an_order_with_put_fails(self):
+        """test succesful updating of an order allows only PATCH method"""
+        self.client.force_authenticate(user=self.user)
+        data = {
+            "item_name": "updated item",
+        }
+        res = self.client.put(self.order_url, data)
+        self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(res.data["message"], "To update order, use PATCH method")
+
     def test_updating_of_an_order_successfully(self):
         """test succesful updating of an order by a authenticated user"""
         self.client.force_authenticate(user=self.user)
@@ -82,7 +92,8 @@ class AuthTestCase(APITestCase):
         """test deletion of an order successfully"""
         self.client.force_authenticate(user=self.user)
         res = self.client.delete(self.order_url)
-        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, {})
 
     def test_user_cannot_delete_other_users_orders(self):
         """test that a user cannot delete an order they didn't create"""

@@ -7,7 +7,7 @@ from rest_framework.utils.serializer_helpers import ReturnList
 
 message_map = lambda view: lambda status_code: {  # noqa
     "POST": "%s created successfully" % view.name.capitalize(),
-    "PUT": "%s updated succesfully" % view.name.capitalize(),
+    "PATCH": "%s updated succesfully" % view.name.capitalize(),
     "DELETE": "%s deleted successfully" % view.name.capitalize(),
 }.get(status_code)
 
@@ -40,9 +40,7 @@ class DefaultRenderer(JSONRenderer):
             message = message_map(renderer_context["view"])(
                 renderer_context["request"].method
             )
-        if data is None:
-            data = {}
-        res_data = (
+        data = (
             ({"status": "success", "message": message, "data": data})
             if status.is_success(status_code)
             else {
@@ -52,5 +50,5 @@ class DefaultRenderer(JSONRenderer):
             }
         )
         return super(DefaultRenderer, self).render(
-            res_data, accepted_media_type, renderer_context
+            data, accepted_media_type, renderer_context
         )

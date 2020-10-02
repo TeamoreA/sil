@@ -1,10 +1,11 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from apps.customers.permisions import IsOwnerOrReadOnly
 from apps.orders.models import Order
-from apps.orders.renders import DefaultRenderer
 from apps.orders.serializers import OrderSerializer
+from helpers.model_wrapper import RetrieveUpdateDestroyAPIViewWrapper
+from helpers.permissions import IsOwnerOrReadOnly
+from utils.renderers import DefaultRenderer
 
 
 class OrderList(ListCreateAPIView):
@@ -20,7 +21,7 @@ class OrderList(ListCreateAPIView):
     renderer_classes = (DefaultRenderer,)
 
 
-class OrderDetail(RetrieveUpdateDestroyAPIView):
+class OrderDetail(RetrieveUpdateDestroyAPIViewWrapper):
     """
     view for retrieving updating and deleting orders
     """
@@ -31,3 +32,9 @@ class OrderDetail(RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     renderer_classes = (DefaultRenderer,)
+
+    def update(self, request, *args, **kwargs):
+        self.operation = "Update order"
+        return super(RetrieveUpdateDestroyAPIViewWrapper, self).update(
+            request, *args, **kwargs
+        )
