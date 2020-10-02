@@ -1,7 +1,7 @@
 # SIL
 [![Build Status](https://travis-ci.com/TeamoreA/sil.svg?branch=master)](https://travis-ci.com/TeamoreA/sil)
 [![sill-app Actions Status](https://github.com/TeamoreA/sil/workflows/sil-app/badge.svg)](https://github.com/TeamoreA/sil/actions)
-[![Coverage Status](https://coveralls.io/repos/github/TeamoreA/sil/badge.svg?branch=bg-fix-coverage)](https://coveralls.io/github/TeamoreA/sil?branch=bg-fix-coverage)
+[![Coverage Status](https://coveralls.io/repos/github/TeamoreA/sil/badge.svg?branch=master)](https://coveralls.io/github/TeamoreA/sil?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 - This is a simple python orders service
