@@ -1,6 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
+from apps.customers.permisions import IsOwnerOrReadOnly
 from apps.orders.models import Order
 from apps.orders.renders import DefaultRenderer
 from apps.orders.serializers import OrderSerializer
@@ -26,7 +27,7 @@ class OrderDetail(RetrieveUpdateDestroyAPIView):
 
     name = "order"
     pluralized_name = "orders"
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     renderer_classes = (DefaultRenderer,)

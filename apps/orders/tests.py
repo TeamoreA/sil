@@ -15,6 +15,12 @@ class AuthTestCase(APITestCase):
             phone_number="0766554433",
             password="mypassword",
         )
+        self.user2 = Customer.objects.create(
+            username="john1",
+            email="john1@app.com",
+            phone_number="0766554431",
+            password="mypassword",
+        )
         self.order = Order.objects.create(
             item_name="an item", amount=200, owner=self.user
         )
@@ -68,7 +74,7 @@ class AuthTestCase(APITestCase):
         data = {
             "item_name": "updated item",
         }
-        res = self.client.put(self.order_url, data)
+        res = self.client.patch(self.order_url, data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data["item_name"], "updated item")
 
@@ -77,3 +83,24 @@ class AuthTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
         res = self.client.delete(self.order_url)
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_user_cannot_delete_other_users_orders(self):
+        """test that a user cannot delete an order they didn't create"""
+        self.client.force_authenticate(user=self.user2)
+        res = self.client.delete(self.order_url)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertIn(
+            res.data["detail"], "You do not have permission to perform this action."
+        )
+
+    def test_user_cannot_update_other_users_orders(self):
+        """test that a user cannot update an order they didn't create"""
+        self.client.force_authenticate(user=self.user2)
+        data = {
+            "item_name": "updated item1",
+        }
+        res = self.client.patch(self.order_url, data)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertIn(
+            res.data["detail"], "You do not have permission to perform this action."
+        )
